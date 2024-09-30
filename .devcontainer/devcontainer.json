@@ -21,7 +21,9 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"DEVSENSE.phptools-vscode"
+				"DEVSENSE.phptools-vscode",
+				"mblode.twig-language-2",
+				"TheNouillet.symfony-vscode"
 			]
 		}
 	}
