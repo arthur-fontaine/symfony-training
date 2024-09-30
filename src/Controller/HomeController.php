@@ -10,11 +10,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
 {
-    #[Route('/', name: 'home')]
-    public function index()
+    #[Route('/', name: 'index')]
+    public function index(): Response
     {
-        return $this->render('home/index.html.twig', [
-            'name' => 'John Doe',
-        ]);
+        return $this->render('home/index.html.twig');
+    }
+
+    #[Route('/default', name: 'default')]
+    public function defaultPage(): Response
+    {
+        return $this->render('home/default.html.twig');
     }
 }
