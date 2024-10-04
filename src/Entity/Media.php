@@ -53,10 +53,17 @@ class Media
     #[ORM\OneToMany(targetEntity: Comments::class, mappedBy: 'media', orphanRemoval: true)]
     private Collection $comments;
 
+    /**
+     * @var Collection<int, Category>
+     */
+    #[ORM\ManyToMany(targetEntity: Category::class, mappedBy: 'media')]
+    private Collection $categories;
+
     public function __construct()
     {
         $this->watchHistories = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->categories = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -215,6 +222,33 @@ class Media
             if ($comment->getMedia() === $this) {
                 $comment->setMedia(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Category>
+     */
+    public function getCategories(): Collection
+    {
+        return $this->categories;
+    }
+
+    public function addCategory(Category $category): static
+    {
+        if (!$this->categories->contains($category)) {
+            $this->categories->add($category);
+            $category->addMedium($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCategory(Category $category): static
+    {
+        if ($this->categories->removeElement($category)) {
+            $category->removeMedium($this);
         }
 
         return $this;
