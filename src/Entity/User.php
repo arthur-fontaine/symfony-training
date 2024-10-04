@@ -53,12 +53,19 @@ class User
     #[ORM\OneToMany(targetEntity: PlaylistSubscription::class, mappedBy: 'subscriber', orphanRemoval: true)]
     private Collection $playlistSubscriptions;
 
+    /**
+     * @var Collection<int, Comments>
+     */
+    #[ORM\OneToMany(targetEntity: Comments::class, mappedBy: 'commenter')]
+    private Collection $comments;
+
     public function __construct()
     {
         $this->watchHistories = new ArrayCollection();
         $this->subscriptionHistories = new ArrayCollection();
         $this->playlists = new ArrayCollection();
         $this->playlistSubscriptions = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -228,6 +235,36 @@ class User
             // set the owning side to null (unless already changed)
             if ($playlistSubscription->getSubscriber() === $this) {
                 $playlistSubscription->setSubscriber(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Comments>
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comments $comment): static
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments->add($comment);
+            $comment->setCommenter($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comments $comment): static
+    {
+        if ($this->comments->removeElement($comment)) {
+            // set the owning side to null (unless already changed)
+            if ($comment->getCommenter() === $this) {
+                $comment->setCommenter(null);
             }
         }
 
