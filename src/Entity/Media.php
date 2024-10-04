@@ -2,13 +2,15 @@
 
 namespace App\Entity;
 
-use App\Enum\MediaTypeEnum;
 use App\Repository\MediaRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+#[ORM\InheritanceType('JOINED')]
+#[ORM\DiscriminatorColumn(name: 'discr', type: 'string')]
+#[ORM\DiscriminatorMap(['serie' => Serie::class, 'movie' => Movie::class])]
 #[ORM\Entity(repositoryClass: MediaRepository::class)]
 class Media
 {
@@ -37,9 +39,6 @@ class Media
 
     #[ORM\Column]
     private array $casting = [];
-
-    #[ORM\Column(enumType: MediaTypeEnum::class)]
-    private ?MediaTypeEnum $mediaType = null;
 
     /**
      * @var Collection<int, WatchHistory>
@@ -158,18 +157,6 @@ class Media
     public function setCasting(array $casting): static
     {
         $this->casting = $casting;
-
-        return $this;
-    }
-
-    public function getMediaType(): ?MediaTypeEnum
-    {
-        return $this->mediaType;
-    }
-
-    public function setMediaType(MediaTypeEnum $mediaType): static
-    {
-        $this->mediaType = $mediaType;
 
         return $this;
     }
