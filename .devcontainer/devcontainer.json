@@ -8,7 +8,11 @@
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	"features": {
 		"ghcr.io/shyim/devcontainers-features/symfony-cli:0": {},
-		"ghcr.io/meaningful-ooo/devcontainer-features/fish": {}
+		"ghcr.io/meaningful-ooo/devcontainer-features/fish": {},
+		"ghcr.io/opencodeco/devcontainers/install-php-extensions": {
+			"extensions": "pdo_pgsql pgsql"
+		},
+		"ghcr.io/itsmechlark/features/postgresql": {}
 	},
 
 	// Configure tool-specific properties.
@@ -26,10 +30,11 @@
 				"TheNouillet.symfony-vscode"
 			]
 		}
-	}
+	},
 
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "sudo chmod a+x \"$(pwd)\" && sudo rm -rf /var/www/html && sudo ln -s \"$(pwd)\" /var/www/html"
+	"postStartCommand": "sudo service postgresql start"
 
 	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
 	// "remoteUser": "root"
