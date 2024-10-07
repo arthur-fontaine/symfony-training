@@ -2,16 +2,20 @@
 
 namespace App\Controller;
 
+use App\Entity\Media;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class MediaController extends AbstractController
 {
-    #[Route('/detail/{id}', name: 'detail')]
-    public function detail($id): Response
+    #[Route('/medias/{id}', name: 'detail')]
+    public function detail(Media $media): Response
     {
-        return $this->render('media/detail.html.twig', ['id' => $id]);
+        dump($media);
+        return $this->render('media/detail.html.twig', [
+            'media' => $media,
+        ]);
     }
 
     #[Route('/detail/serie/{id}', name: 'detail_serie')]

@@ -10,7 +10,7 @@
 		"ghcr.io/shyim/devcontainers-features/symfony-cli:0": {},
 		"ghcr.io/meaningful-ooo/devcontainer-features/fish": {},
 		"ghcr.io/opencodeco/devcontainers/install-php-extensions": {
-			"extensions": "pdo_pgsql pgsql"
+			"extensions": "pdo_pgsql pgsql intl"
 		},
 		"ghcr.io/itsmechlark/features/postgresql": {}
 	},

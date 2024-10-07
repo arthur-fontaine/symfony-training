@@ -18,7 +18,10 @@
         "symfony/framework-bundle": "7.1.*",
         "symfony/runtime": "7.1.*",
         "symfony/twig-bundle": "7.1.*",
-        "symfony/yaml": "7.1.*"
+        "symfony/ux-twig-component": "^2.20",
+        "symfony/yaml": "7.1.*",
+        "twig/extra-bundle": "^3.13",
+        "twig/intl-extra": "*"
     },
     "config": {
         "allow-plugins": {

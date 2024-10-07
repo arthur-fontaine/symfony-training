@@ -1,0 +1,8 @@
+<span
+	class="bg-{{ color }} py-1 px-3 text-xxs rounded w-max inline-block">
+	{% if title %}
+		<span class="font-bold mr-2">{{ title }}</span>
+	{% endif %}
+	
+	{% block content %}{% endblock %}
+</span>

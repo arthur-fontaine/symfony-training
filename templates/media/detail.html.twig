@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{# <!DOCTYPE html>
 <html lang="fr">
 
 <head>
@@ -102,7 +102,7 @@
             <div class="tracking-wideflex-1">MMovie<span class="text-red-600">.</span></div>
         </header>
         <section class="">
-            <h1 class="text-lg font-medium text-black">Détails de <span class="font-bold text-red-600">Interstellar</span></h1>
+            <h1 class="text-lg font-medium text-black">Détails de <span class="font-bold text-red-600">{{ media.title }}</span></h1>
             <div class="flex flex-col items-center mt-9">
                 <a class="relative flex w-full flex-row p-3 items-center justify-center rounded-lg overflow-hidden border hover:scale-105 cursor-pointer transition hover:bg-gray-100">
                     <span class="text-red-600 font-bold mr-2">
@@ -357,4 +357,320 @@
 
 </body>
 
-</html>
+</html> #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Streemi —
+	{{ media.title }}
+{% endblock %}
+
+{% block body %}
+
+	<section>
+		<h1 class="text-lg font-medium text-black">
+			Détails de
+			<span class="font-bold text-red-600">
+				{{ media.title }}
+			</span>
+		</h1>
+		<div class="flex flex-col items-center mt-9">
+			<a class="relative flex w-full flex-row p-3 items-center justify-center rounded-lg overflow-hidden border hover:scale-105 cursor-pointer transition hover:bg-gray-100">
+				<span class="text-red-600 font-bold mr-2">
+					<svg class="h-6 w-6" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24">
+						<title>repeat-variant</title><path d="M6,5.75L10.25,10H7V16H13.5L15.5,18H7A2,2 0 0,1 5,16V10H1.75L6,5.75M18,18.25L13.75,14H17V8H10.5L8.5,6H17A2,2 0 0,1 19,8V14H22.25L18,18.25Z"/></svg>
+				</span>
+				<span class="capitalize font-medium text-md">Trouver un film
+					<span class="text-red-600">similaire</span>
+				</span>
+			</a>
+		</div>
+	</section>
+
+	<section class="mt-9">
+		<div
+			class="flex flex-col justify-between mt-4 bg-black/10 bg-blend-multiply h-96 overflow-hidden bg-cover bg-center px-7 pt-4 pb-6 text-white -ml-10 -mr-10 rounded-none" {# TODO: use media image #} style="background-image: url('{{ media.coverImage }}');">
+			{# TODO: use real "recommended by" #}
+			<div class="flex -space-x-1 items-center ">
+				<img class="rounded-full w-7 h-7 shadow-lg border border-white" src="https://random.imagecdn.app/100/100?a" alt="" srcset="">
+				<img class="rounded-full w-7 h-7 shadow-lg border border-white" src="https://random.imagecdn.app/100/100?b" alt="" srcset="">
+				<img class="rounded-full w-7 h-7 shadow-lg border border-white" src="https://random.imagecdn.app/100/100?c" alt="" srcset="">
+				<span class="pl-4 text-xs drop-shadow-lg">Recommandé par 12 amis</span>
+			</div>
+			<div class="bg-gradient-to-r from-black/40 to-transparent -mx-7 -mb-6 px-7 pb-6 pt-2">
+				<span class="uppercase text-3xl font-semibold drop-shadow-lg ">
+					{{ media.title }}
+				</span>
+				<div class="mt-4 flex items-center justify-between">
+					<div class="flex space-x-3 items-center">
+						<a href="#" class="px-5 space-x-2 flex items-center justify-center py-2.5 bg-red-600 hover:bg-red-700 rounded-lg text-xs inline-block">
+							<twig:Icon name="play-box"/>
+							<span>Reprendre la lecture</span>
+						</a>
+						<a href="#" class="px-5 space-x-2 flex items-center justify-center py-2.5 bg-red-600 hover:bg-red-700 rounded-lg text-xs inline-block">
+							<twig:Icon name="check-circle"/>
+							<span>Terminer</span>
+						</a>
+						<a href="#" class="px-5 space-x-2 flex items-center justify-center py-2.5 bg-red-600 hover:bg-red-700 rounded-lg text-xs inline-block">
+							<twig:Icon name="reload"/>
+							<span>Recommencer depuis le début</span>
+						</a>
+						<a href="#" class="p-2.5 bg-gray-800/80 rounded-lg hover:bg-red-600">
+							<twig:Icon name="dots-vertical"/>
+						</a>
+					</div>
+					<div class="text-right space-x-1">
+						<twig:Tag>1h42m restants</twig:Tag>
+						{# TODO: Use real user data #}
+						<twig:Tag>12 visionnages</twig:Tag>
+						{# TODO: Use real user data #}
+						<twig:Tag>{{ media.getComments().count() ~ ' commentaires' }}</twig:Tag>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="mt-9">
+		<div class="max-w-3xl mx-auto">
+			<h2 class="text-lg font-medium text-black">
+				Vos
+				<span class="font-bold text-red-600">visionnages
+				</span>
+			</h2>
+			<div class=" font-medium mt-8 bg-gray-100 border border-black/10 rounded-lg px-8 py-4">
+				<twig:Icon name="information" class="inline-block opacity-50"/>
+				Vous avez vu ce film
+				<span
+					class="text-red-600 font-bold">
+					{# TODO: Use real user data #}
+					43 fois
+				</span>
+				soit un total de
+				<span
+					class="text-red-600 font-bold">
+					{# TODO: Use real user data #}
+					190 heures
+				</span>
+				de visionnage.
+				<a href="" {# TODO: Put the right link #} class="hover:text-red-600 underline decoration-red-400 decoration-2">Voir l'historique</a>
+			</div>
+		</div>
+	</section>
+	<section class="mt-9">
+		<div class="max-w-3xl mx-auto">
+			<h2 class="text-lg font-medium text-black">
+				<span class="font-bold text-red-600">Infos</span>
+				du film</h2>
+			<div class="flex items-center flex-wrap mt-9 gap-2">
+				<twig:Tag title="Durée" color="black/10">2h40 mins</twig:Tag>
+				{# TODO: Use real data #}
+				<twig:Tag title="Date de sortie" color="black/10">{{ media.releasedAt | format_date(pattern:'d MMMM Y', locale:'fr') }}</twig:Tag>
+				<twig:Tag title="Notes" color="black/10">
+					<span class="space-x-2 items-center inline-flex">
+						<span>7.4</span> {# TODO: Use real data #}
+						<twig:Icon name="imdb"/>
+					</span>
+				</twig:Tag>
+				<twig:Tag title="Langues" color="black/10">Français, Anglais, Italien</twig:Tag> {# TODO: Use real data #}
+				<twig:Tag title="Sous-titre" color="black/10">Français, Anglais</twig:Tag> {# TODO: Use real data #}
+				<twig:Tag title="Catégories" color="black/10">
+					{{ media.categories | map(c => c.name) | join(', ') }}
+				</twig:Tag>
+				<twig:Tag title="Bande annonce" color="black/10">
+					<a href="#" class="hover:text-red-600 underline decoration-red-400 decoration-2">Youtube</a>,&nbsp;
+					<a href="#" class="hover:text-red-600 underline decoration-red-400 decoration-2">Allociné</a> {# TODO: Use real data #}
+				</twig:Tag>
+			</div>
+		</div>
+		<div class="max-w-3xl mx-auto mt-9">
+			<h2 class="text-lg font-medium text-black">Résumé
+				<span class="font-bold text-red-600">rapide</span>
+			</h2>
+			<p class="text-md mt-9">
+				{{ media.shortDescription }}
+			</p>
+		</div>
+		<div class="max-w-3xl mx-auto mt-9">
+			<h2 class="text-lg font-medium text-black">
+				<span class="font-bold text-red-600">Équipe</span>
+				du film</h2>
+			<ul class="mt-9 grid grid-cols-2 sm:grid-cols-4 gap-x-5 gap-y-5">
+				<li class="relative rounded-xl overflow-hidden transition cursor-pointer hover:scale-105 hover:opacity-90 hover:shadow-md">
+					<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Christopher_Nolan_Cannes_2018.jpg/520px-Christopher_Nolan_Cannes_2018.jpg" class="object-cover h-full w-full -z-10" alt="">
+					<div class="absolute top-0 h-full w-full bg-gradient-to-t from-black/50 p-3 flex flex-col justify-end">
+						<div class="self-center flex flex-col items-center space-y-2">
+							<span class="capitalize text-white font-medium drop-shadow-md">Christopher Nolan</span>
+							<span class="text-gray-100 text-xs">Réalisateur</span>
+						</div>
+					</div>
+				</li>
+				<li class="relative rounded-xl overflow-hidden transition cursor-pointer hover:scale-105 hover:opacity-90 hover:shadow-md">
+					<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Hans-Zimmer-profile.jpg/400px-Hans-Zimmer-profile.jpg" class="object-cover h-full w-full -z-10" alt="">
+					<div class="absolute top-0 h-full w-full bg-gradient-to-t from-black/50 p-3 flex flex-col justify-end">
+						<div class="self-center flex flex-col items-center space-y-2">
+							<span class="capitalize text-white font-medium drop-shadow-md">Hans Zimmer</span>
+							<span class="text-gray-100 text-xs">Compositeur</span>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div class="max-w-3xl mx-auto mt-9">
+			<h2 class="text-lg font-medium text-black">Le
+				<span class="font-bold text-red-600">Casting</span>
+			</h2>
+			<ul class="mt-9 grid grid-cols-2 sm:grid-cols-4 gap-x-5 gap-y-5">
+				<li class="relative rounded-xl overflow-hidden transition cursor-pointer hover:scale-105 hover:opacity-90 hover:shadow-md">
+					<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Leonardo_Dicaprio_Cannes_2019.jpg/500px-Leonardo_Dicaprio_Cannes_2019.jpg" class="object-cover h-full w-full -z-10" alt="">
+					<div class="absolute top-0 h-full w-full bg-gradient-to-t from-black/50 p-3 flex flex-col justify-end">
+						<div class="self-center flex flex-col items-center space-y-2">
+							<span class="capitalize text-white font-medium drop-shadow-md">Leonardo DiCaprio</span>
+							<span class="text-gray-100 text-xs truncate">Dominic Cobb, l'extracteur</span>
+						</div>
+					</div>
+				</li>
+				<li class="relative rounded-xl overflow-hidden transition cursor-pointer hover:scale-105 hover:opacity-90 hover:shadow-md">
+					<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Joseph_Gordon-Levitt_by_Gage_Skidmore_2.jpg/440px-Joseph_Gordon-Levitt_by_Gage_Skidmore_2.jpg" class="object-cover h-full w-full -z-10" alt="">
+					<div class="absolute top-0 h-full w-full bg-gradient-to-t from-black/50 p-3 flex flex-col justify-end">
+						<div class="self-center flex flex-col items-center space-y-2">
+							<span class="capitalize text-white font-medium drop-shadow-md">Joseph Gordon-Levitt</span>
+							<span class="text-gray-100 text-xs truncate">Arthur, l'organisateur</span>
+						</div>
+					</div>
+				</li>
+				<li class="relative rounded-xl overflow-hidden transition cursor-pointer hover:scale-105 hover:opacity-90 hover:shadow-md">
+					<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/2023_National_Book_Festival_%2853122454007%29_%28cropped%29.jpg/440px-2023_National_Book_Festival_%2853122454007%29_%28cropped%29.jpg" class="object-cover h-full w-full -z-10" alt="">
+					<div class="absolute top-0 h-full w-full bg-gradient-to-t from-black/50 p-3 flex flex-col justify-end">
+						<div class="self-center flex flex-col items-center space-y-2">
+							<span class="capitalize text-white font-medium drop-shadow-md">Elliot (Ellen) Page</span>
+							<span class="text-gray-100 text-xs truncate">Ariane, l'architecte</span>
+						</div>
+					</div>
+				</li>
+				<li class="relative rounded-xl overflow-hidden transition cursor-pointer hover:scale-105 hover:opacity-90 hover:shadow-md">
+					<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Marion_Cotillard_at_2019_Cannes.jpg/440px-Marion_Cotillard_at_2019_Cannes.jpg" class="object-cover h-full w-full -z-10" alt="">
+					<div class="absolute top-0 h-full w-full bg-gradient-to-t from-black/50 p-3 flex flex-col justify-end">
+						<div class="self-center flex flex-col items-center space-y-2">
+							<span class="capitalize text-white font-medium drop-shadow-md">Marion Cotillard</span>
+							<span class="text-gray-100 text-xs truncate">Mallorie Cobb, l'ombre</span>
+						</div>
+					</div>
+				</li>
+				<li class="relative rounded-xl overflow-hidden transition cursor-pointer hover:scale-105 hover:opacity-90 hover:shadow-md">
+					<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Tom_Hardy_by_Gage_Skidmore.jpg/520px-Tom_Hardy_by_Gage_Skidmore.jpg" class="object-cover h-full w-full -z-10" alt="">
+					<div class="absolute top-0 h-full w-full bg-gradient-to-t from-black/50 p-3 flex flex-col justify-end">
+						<div class="self-center flex flex-col items-center space-y-2">
+							<span class="capitalize text-white font-medium drop-shadow-md">Tom Hardy</span>
+							<span class="text-gray-100 text-xs truncate">Eames, le faussaire</span>
+						</div>
+					</div>
+				</li>
+				<li class="relative rounded-xl overflow-hidden transition cursor-pointer hover:scale-105 hover:opacity-90 hover:shadow-md">
+					<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Ken_Watanabe_01.jpg/440px-Ken_Watanabe_01.jpg" class="object-cover h-full w-full -z-10" alt="">
+					<div class="absolute top-0 h-full w-full bg-gradient-to-t from-black/50 p-3 flex flex-col justify-end">
+						<div class="self-center flex flex-col items-center space-y-2">
+							<span class="capitalize text-white font-medium drop-shadow-md">Ken Watanabe</span>
+							<span class="text-gray-100 text-xs truncate">Mr. Saito, le touriste</span>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div class="max-w-3xl mx-auto mt-9">
+			<h2 class="text-lg font-medium text-black">Résumé
+				<span class="font-bold text-red-600">détaillé</span>
+			</h2>
+			<p class="text-md mt-9">
+				{{ media.longDescription }}
+		</div>
+	</section>
+	<section class="mt-9">
+		<div class="max-w-3xl mx-auto">
+			<h2 class="text-lg font-medium text-black">Les
+				<span class="font-bold text-red-600">commentaires</span>
+			</h2>
+			<ul class="space-y-4">
+				<li class="mt-9">
+					<div class="bg-gray-100 p-4 rounded-lg">
+						<div class="flex items-center">
+							<img src="https://random.imagecdn.app/100/100?a" class="w-10 h-10 rounded-full" alt="">
+							<div class="ml-4 w-full">
+								<span class="font-medium">John Doe</span>
+								<span class="text-xs text-gray-500 flex items-center justify-between w-full">
+									<span>Il y a 2 jours</span>
+									<span></span>
+								</span>
+							</div>
+						</div>
+						<p class="mt-4 w-full">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, consectetur deleniti deserunt ducimus harum iusto laboriosam minima nobis obcaecati odit officiis omnis quibusdam repellat repudiandae totam voluptas, voluptatem voluptatibus voluptatum.</p>
+					</div>
+				</li>
+				<li class="mt-9 pl-9 border-l-4">
+					<div class="bg-gray-100 p-4 rounded-lg">
+						<div class="flex items-center">
+							<img src="https://random.imagecdn.app/100/100?b" class="w-10 h-10 rounded-full" alt="">
+							<div class="ml-4 w-full">
+								<span class="font-medium">Jane Doe</span>
+								<span class="text-xs text-gray-500 flex items-center justify-between w-full">
+									<span>Il y a 4 heures</span>
+									<span></span>
+								</span>
+							</div>
+						</div>
+						<p class="mt-4 w-full">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, consectetur deleniti deserunt ducimus harum iusto laboriosam minima nobis obcaecati.</p>
+					</div>
+				</li>
+				<li class="mt-9 pl-9 border-l-4">
+					<div class="bg-gray-100 p-4 rounded-lg">
+						<div class="flex items-center">
+							<img src="https://random.imagecdn.app/100/100?c" class="w-10 h-10 rounded-full" alt="">
+							<div class="ml-4 w-full">
+								<span class="font-medium">Marco Doe</span>
+								<span class="text-xs text-gray-500 flex items-center justify-between w-full">
+									<span>Il y a 1 heures</span>
+									<span></span>
+								</span>
+							</div>
+						</div>
+						<p class="mt-4 w-full">Lorem ipsum dolor sit amet !!</p>
+					</div>
+				</li>
+				<li class="mt-9 pl-9 border-l-4 relative cursor-not-allowed">
+					<span class="absolute top-2 right-2 px-3 py-1 bg-orange-100 rounded-md">En attente de vérification</span>
+					<div class="bg-gray-100 p-4 rounded-lg opacity-40">
+						<div class="flex items-center">
+							<img src="https://random.imagecdn.app/100/100?c" class="w-10 h-10 rounded-full" alt="">
+							<div class="ml-4 w-full">
+								<span class="font-medium">Harry Potter</span>
+								<span class="text-xs text-gray-500 flex items-center justify-between w-full">
+									<span>Il y a 1O secondes</span>
+									<span></span>
+								</span>
+							</div>
+						</div>
+						<p class="mt-4 w-full">Lorem ipsum dolor sit amet !!</p>
+					</div>
+				</li>
+			</ul>
+			<form class="mt-9 bg-gray-100 p-4 rounded-lg">
+				<h3 class="text-center text-md font-bold my-4">Réagir / commenter le film ?</h3>
+				<div class="relative">
+					<textarea rows="5" class="w-full px-8 py-4 rounded-lg font-medium bg-white border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white" placeholder="Votre commentaire"></textarea>
+				</div>
+				<div class="flex items-center justify-center mt-2">
+					<button class="relative flex bg-red-600 flex-row p-2 items-center justify-center rounded-md text-sm overflow-hidden border cursor-pointer transition text-white hover:opacity-90 hover:scale-105">
+						<svg class="fill-current h-4 w-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24">
+							<title>plus-circle</title><path d="M17,13H13V17H11V13H7V11H11V7H13V11H17M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"/></svg>
+						Ajouter le commentaire
+					</button>
+				</div>
+				<div>
+					<span class="opacity-50 text-xs italic mt-4 block">* Votre commentaire sera publié et visible par tous après avoir été analysé par notre système.</span>
+				</div>
+			</form>
+		</div>
+	</section>
+{% endblock %}
+
+{% set show_right_nav = false %}
