@@ -11,3 +11,15 @@ rm -rf tmp
 ```sh
 symfony local:server:start
 ```
+
+### Migrate the database
+
+```sh
+symfony console doctrine:migrations:migrate
+```
+
+### Load the fixtures
+
+```sh
+symfony console doctrine:fixtures:load
+```
