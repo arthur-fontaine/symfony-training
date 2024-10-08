@@ -12,7 +12,6 @@ class MediaController extends AbstractController
     #[Route('/medias/{id}', name: 'detail')]
     public function detail(Media $media): Response
     {
-        dump($media);
         return $this->render('media/detail.html.twig', [
             'media' => $media,
         ]);

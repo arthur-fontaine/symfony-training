@@ -591,67 +591,11 @@
 				<span class="font-bold text-red-600">commentaires</span>
 			</h2>
 			<ul class="space-y-4">
-				<li class="mt-9">
-					<div class="bg-gray-100 p-4 rounded-lg">
-						<div class="flex items-center">
-							<img src="https://random.imagecdn.app/100/100?a" class="w-10 h-10 rounded-full" alt="">
-							<div class="ml-4 w-full">
-								<span class="font-medium">John Doe</span>
-								<span class="text-xs text-gray-500 flex items-center justify-between w-full">
-									<span>Il y a 2 jours</span>
-									<span></span>
-								</span>
-							</div>
-						</div>
-						<p class="mt-4 w-full">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, consectetur deleniti deserunt ducimus harum iusto laboriosam minima nobis obcaecati odit officiis omnis quibusdam repellat repudiandae totam voluptas, voluptatem voluptatibus voluptatum.</p>
-					</div>
-				</li>
-				<li class="mt-9 pl-9 border-l-4">
-					<div class="bg-gray-100 p-4 rounded-lg">
-						<div class="flex items-center">
-							<img src="https://random.imagecdn.app/100/100?b" class="w-10 h-10 rounded-full" alt="">
-							<div class="ml-4 w-full">
-								<span class="font-medium">Jane Doe</span>
-								<span class="text-xs text-gray-500 flex items-center justify-between w-full">
-									<span>Il y a 4 heures</span>
-									<span></span>
-								</span>
-							</div>
-						</div>
-						<p class="mt-4 w-full">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, consectetur deleniti deserunt ducimus harum iusto laboriosam minima nobis obcaecati.</p>
-					</div>
-				</li>
-				<li class="mt-9 pl-9 border-l-4">
-					<div class="bg-gray-100 p-4 rounded-lg">
-						<div class="flex items-center">
-							<img src="https://random.imagecdn.app/100/100?c" class="w-10 h-10 rounded-full" alt="">
-							<div class="ml-4 w-full">
-								<span class="font-medium">Marco Doe</span>
-								<span class="text-xs text-gray-500 flex items-center justify-between w-full">
-									<span>Il y a 1 heures</span>
-									<span></span>
-								</span>
-							</div>
-						</div>
-						<p class="mt-4 w-full">Lorem ipsum dolor sit amet !!</p>
-					</div>
-				</li>
-				<li class="mt-9 pl-9 border-l-4 relative cursor-not-allowed">
-					<span class="absolute top-2 right-2 px-3 py-1 bg-orange-100 rounded-md">En attente de vérification</span>
-					<div class="bg-gray-100 p-4 rounded-lg opacity-40">
-						<div class="flex items-center">
-							<img src="https://random.imagecdn.app/100/100?c" class="w-10 h-10 rounded-full" alt="">
-							<div class="ml-4 w-full">
-								<span class="font-medium">Harry Potter</span>
-								<span class="text-xs text-gray-500 flex items-center justify-between w-full">
-									<span>Il y a 1O secondes</span>
-									<span></span>
-								</span>
-							</div>
-						</div>
-						<p class="mt-4 w-full">Lorem ipsum dolor sit amet !!</p>
-					</div>
-				</li>
+                {% for comment in media.comments %}
+                    {% if comment.parentComment == null %}
+                        <twig:Comment comment="{{ comment }}"/>
+                    {% endif %}
+                {% endfor %}
 			</ul>
 			<form class="mt-9 bg-gray-100 p-4 rounded-lg">
 				<h3 class="text-center text-md font-bold my-4">Réagir / commenter le film ?</h3>

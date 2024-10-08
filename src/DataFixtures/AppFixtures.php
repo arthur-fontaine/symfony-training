@@ -170,17 +170,21 @@ class AppFixtures extends Fixture
         $comment = new Comment();
         $comment->setContent($this->faker->sentence(10));
         $comment->setStatus($this->faker->randomElement(CommentStatusEnum::cases()));
+
+        $medias = $this->getToPersistMedia();
+        $media = $medias[$this->faker->numberBetween(0, count($medias) - 1)];
+        $media->addComment($comment);
+        $comment->setMedia($media);
         
         if (!$recursive) {
             for ($i = 0; $i < 3; $i++) {
                 $childComment = $this->createComment(true);
-                $childComment->setParentComment($childComment);
-                $comment->addChildrenComment($comment);
+                $childComment->setParentComment($comment);
+                $childComment->setMedia($media);
+                $comment->addChildrenComment($childComment);
+                $media->addComment($childComment);
             }
         }
-
-        $medias = $this->getToPersistMedia();
-        $comment->setMedia($medias[$this->faker->numberBetween(0, count($medias) - 1)]);
 
         $this->toPersist[] = $comment;
 
