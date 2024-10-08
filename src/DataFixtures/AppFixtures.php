@@ -15,7 +15,7 @@ use App\Entity\Serie;
 use App\Entity\Subscription;
 use App\Entity\SubscriptionHistory;
 use App\Entity\User;
-use App\Entity\Comments;
+use App\Entity\Comment;
 use App\Entity\Playlist;
 use App\Entity\PlaylistMedia;
 use App\Entity\PlaylistSubscription;
@@ -36,8 +36,16 @@ class AppFixtures extends Fixture
             $this->createCategory();
         }
 
+        $users = [];
         for ($i = 0; $i < 10; $i++) {
-            $this->createUser();
+            $user = $this->createUser();
+            $users[] = $user;
+        }
+
+        foreach ($this->toPersist as $entity) {
+            if ($entity instanceof Comment) {
+                $this->feedCommentWithNoUser($entity, $users);
+            }
         }
 
         foreach ($this->toPersist as $entity) {
@@ -150,17 +158,24 @@ class AppFixtures extends Fixture
         return $createdUserSubscriptionHistories;
     }
 
-    private function createComment(bool $recursive = false): Comments
+    private function feedCommentWithNoUser(Comment $comment, array $users): void
     {
-        $comment = new Comments();
+        $user = $users[$this->faker->numberBetween(0, count($users) - 1)];
+        $comment->setCommenter($user);
+        $user->addComment($comment);
+    }
+
+    private function createComment(bool $recursive = false): Comment
+    {
+        $comment = new Comment();
         $comment->setContent($this->faker->sentence(10));
         $comment->setStatus($this->faker->randomElement(CommentStatusEnum::cases()));
         
         if (!$recursive) {
             for ($i = 0; $i < 3; $i++) {
                 $childComment = $this->createComment(true);
-                $comment->addParentComment($childComment);
-                $childComment->setChildrenComments($comment);
+                $childComment->setParentComment($childComment);
+                $comment->addChildrenComment($comment);
             }
         }
 

@@ -15,6 +15,7 @@ symfony local:server:start
 ### Migrate the database
 
 ```sh
+php bin/console doctrine:migrations:diff
 symfony console doctrine:migrations:migrate
 ```
 
