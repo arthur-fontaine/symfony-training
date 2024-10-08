@@ -303,9 +303,14 @@ class AppFixtures extends Fixture
         $media->setReleasedAt($this->faker->dateTimeBetween('-30 years', 'now'));
         $media->setCoverImage($this->faker->imageUrl());
         $media->setStaff([
-            'director' => $this->faker->name(),
-            'producer' => $this->faker->name(),
-            'screenwriter' => $this->faker->name(),
+            ['name' => $this->faker->name(), 'image' => $this->faker->imageUrl(), 'role' => 'Director'],
+            ['name' => $this->faker->name(), 'image' => $this->faker->imageUrl(), 'role' => 'Producer'],
+            ['name' => $this->faker->name(), 'image' => $this->faker->imageUrl(), 'role' => 'Screenwriter'],
+            ['name' => $this->faker->name(), 'image' => $this->faker->imageUrl(), 'role' => 'Actor'],
+            ['name' => $this->faker->name(), 'image' => $this->faker->imageUrl(), 'role' => 'Actor'],
+            ['name' => $this->faker->name(), 'image' => $this->faker->imageUrl(), 'role' => 'Actor'],
+            ['name' => $this->faker->name(), 'image' => $this->faker->imageUrl(), 'role' => 'Actor'],
+            ['name' => $this->faker->name(), 'image' => $this->faker->imageUrl(), 'role' => 'Actor'], 
         ]);
         $media->setCasting([
             $this->faker->name(),

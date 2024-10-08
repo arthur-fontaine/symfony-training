@@ -496,24 +496,19 @@
 				<span class="font-bold text-red-600">Équipe</span>
 				du film</h2>
 			<ul class="mt-9 grid grid-cols-2 sm:grid-cols-4 gap-x-5 gap-y-5">
-				<li class="relative rounded-xl overflow-hidden transition cursor-pointer hover:scale-105 hover:opacity-90 hover:shadow-md">
-					<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Christopher_Nolan_Cannes_2018.jpg/520px-Christopher_Nolan_Cannes_2018.jpg" class="object-cover h-full w-full -z-10" alt="">
-					<div class="absolute top-0 h-full w-full bg-gradient-to-t from-black/50 p-3 flex flex-col justify-end">
-						<div class="self-center flex flex-col items-center space-y-2">
-							<span class="capitalize text-white font-medium drop-shadow-md">Christopher Nolan</span>
-							<span class="text-gray-100 text-xs">Réalisateur</span>
-						</div>
-					</div>
-				</li>
-				<li class="relative rounded-xl overflow-hidden transition cursor-pointer hover:scale-105 hover:opacity-90 hover:shadow-md">
-					<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Hans-Zimmer-profile.jpg/400px-Hans-Zimmer-profile.jpg" class="object-cover h-full w-full -z-10" alt="">
-					<div class="absolute top-0 h-full w-full bg-gradient-to-t from-black/50 p-3 flex flex-col justify-end">
-						<div class="self-center flex flex-col items-center space-y-2">
-							<span class="capitalize text-white font-medium drop-shadow-md">Hans Zimmer</span>
-							<span class="text-gray-100 text-xs">Compositeur</span>
-						</div>
-					</div>
-				</li>
+				{% for key, staff in media.staff %}
+                    {% if staff.role != "Actor" %}
+                        <li class="relative rounded-xl overflow-hidden transition cursor-pointer hover:scale-105 hover:opacity-90 hover:shadow-md">
+                            <img src="{{ staff.image }}" class="object-cover h-full w-full -z-10" alt="">
+                            <div class="absolute top-0 h-full w-full bg-gradient-to-t from-black/50 p-3 flex flex-col justify-end">
+                                <div class="self-center flex flex-col items-center space-y-2">
+                                    <span class="capitalize text-white font-medium drop-shadow-md">{{ staff.name }}</span>
+                                    <span class="text-gray-100 text-xs truncate">{{ staff.role }}</span>
+                                </div>
+                            </div>
+                        </li>
+                    {% endif %}
+                {% endfor %}
 			</ul>
 		</div>
 		<div class="max-w-3xl mx-auto mt-9">
@@ -521,60 +516,18 @@
 				<span class="font-bold text-red-600">Casting</span>
 			</h2>
 			<ul class="mt-9 grid grid-cols-2 sm:grid-cols-4 gap-x-5 gap-y-5">
-				<li class="relative rounded-xl overflow-hidden transition cursor-pointer hover:scale-105 hover:opacity-90 hover:shadow-md">
-					<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Leonardo_Dicaprio_Cannes_2019.jpg/500px-Leonardo_Dicaprio_Cannes_2019.jpg" class="object-cover h-full w-full -z-10" alt="">
-					<div class="absolute top-0 h-full w-full bg-gradient-to-t from-black/50 p-3 flex flex-col justify-end">
-						<div class="self-center flex flex-col items-center space-y-2">
-							<span class="capitalize text-white font-medium drop-shadow-md">Leonardo DiCaprio</span>
-							<span class="text-gray-100 text-xs truncate">Dominic Cobb, l'extracteur</span>
-						</div>
-					</div>
-				</li>
-				<li class="relative rounded-xl overflow-hidden transition cursor-pointer hover:scale-105 hover:opacity-90 hover:shadow-md">
-					<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Joseph_Gordon-Levitt_by_Gage_Skidmore_2.jpg/440px-Joseph_Gordon-Levitt_by_Gage_Skidmore_2.jpg" class="object-cover h-full w-full -z-10" alt="">
-					<div class="absolute top-0 h-full w-full bg-gradient-to-t from-black/50 p-3 flex flex-col justify-end">
-						<div class="self-center flex flex-col items-center space-y-2">
-							<span class="capitalize text-white font-medium drop-shadow-md">Joseph Gordon-Levitt</span>
-							<span class="text-gray-100 text-xs truncate">Arthur, l'organisateur</span>
-						</div>
-					</div>
-				</li>
-				<li class="relative rounded-xl overflow-hidden transition cursor-pointer hover:scale-105 hover:opacity-90 hover:shadow-md">
-					<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/2023_National_Book_Festival_%2853122454007%29_%28cropped%29.jpg/440px-2023_National_Book_Festival_%2853122454007%29_%28cropped%29.jpg" class="object-cover h-full w-full -z-10" alt="">
-					<div class="absolute top-0 h-full w-full bg-gradient-to-t from-black/50 p-3 flex flex-col justify-end">
-						<div class="self-center flex flex-col items-center space-y-2">
-							<span class="capitalize text-white font-medium drop-shadow-md">Elliot (Ellen) Page</span>
-							<span class="text-gray-100 text-xs truncate">Ariane, l'architecte</span>
-						</div>
-					</div>
-				</li>
-				<li class="relative rounded-xl overflow-hidden transition cursor-pointer hover:scale-105 hover:opacity-90 hover:shadow-md">
-					<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Marion_Cotillard_at_2019_Cannes.jpg/440px-Marion_Cotillard_at_2019_Cannes.jpg" class="object-cover h-full w-full -z-10" alt="">
-					<div class="absolute top-0 h-full w-full bg-gradient-to-t from-black/50 p-3 flex flex-col justify-end">
-						<div class="self-center flex flex-col items-center space-y-2">
-							<span class="capitalize text-white font-medium drop-shadow-md">Marion Cotillard</span>
-							<span class="text-gray-100 text-xs truncate">Mallorie Cobb, l'ombre</span>
-						</div>
-					</div>
-				</li>
-				<li class="relative rounded-xl overflow-hidden transition cursor-pointer hover:scale-105 hover:opacity-90 hover:shadow-md">
-					<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Tom_Hardy_by_Gage_Skidmore.jpg/520px-Tom_Hardy_by_Gage_Skidmore.jpg" class="object-cover h-full w-full -z-10" alt="">
-					<div class="absolute top-0 h-full w-full bg-gradient-to-t from-black/50 p-3 flex flex-col justify-end">
-						<div class="self-center flex flex-col items-center space-y-2">
-							<span class="capitalize text-white font-medium drop-shadow-md">Tom Hardy</span>
-							<span class="text-gray-100 text-xs truncate">Eames, le faussaire</span>
-						</div>
-					</div>
-				</li>
-				<li class="relative rounded-xl overflow-hidden transition cursor-pointer hover:scale-105 hover:opacity-90 hover:shadow-md">
-					<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Ken_Watanabe_01.jpg/440px-Ken_Watanabe_01.jpg" class="object-cover h-full w-full -z-10" alt="">
-					<div class="absolute top-0 h-full w-full bg-gradient-to-t from-black/50 p-3 flex flex-col justify-end">
-						<div class="self-center flex flex-col items-center space-y-2">
-							<span class="capitalize text-white font-medium drop-shadow-md">Ken Watanabe</span>
-							<span class="text-gray-100 text-xs truncate">Mr. Saito, le touriste</span>
-						</div>
-					</div>
-				</li>
+                {% for key, staff in media.staff %}
+                    {% if staff.role == "Actor" %}
+                        <li class="relative rounded-xl overflow-hidden transition cursor-pointer hover:scale-105 hover:opacity-90 hover:shadow-md">
+                            <img src="{{ staff.image }}" class="object-cover h-full w-full -z-10" alt="">
+                            <div class="absolute top-0 h-full w-full bg-gradient-to-t from-black/50 p-3 flex flex-col justify-end">
+                                <div class="self-center flex flex-col items-center space-y-2">
+                                    <span class="capitalize text-white font-medium drop-shadow-md">{{ staff.name }}</span>
+                                </div>
+                            </div>
+                        </li>
+                    {% endif %}
+                {% endfor %}
 			</ul>
 		</div>
 		<div class="max-w-3xl mx-auto mt-9">
@@ -591,6 +544,9 @@
 				<span class="font-bold text-red-600">commentaires</span>
 			</h2>
 			<ul class="space-y-4">
+                <li class="hidden last:block">
+                    <p class="text-center text-gray-600">Aucun commentaire pour le moment</p>
+                </li>
                 {% for comment in media.comments %}
                     {% if comment.parentComment == null %}
                         <twig:Comment comment="{{ comment }}"/>
